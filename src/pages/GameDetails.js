@@ -4,7 +4,7 @@ import axios from 'axios'
 const GameDetails = (props) => {
   const [selectedGame, setSelectedGame] = useState(null)
   const [gameDetails, setGameDetails] = useState(null)
-  // const [starRating, setStarRating] = useState('')
+  const [starRating, setStarRating] = useState('')
 
   let ratingStars = '';
   useEffect(async () => {
@@ -14,22 +14,25 @@ const GameDetails = (props) => {
   }, [props.match.params.gameId])
 
 
-  // useEffect(() => {
-  //   let difference = (5 - parseInt(selectedGame.rating))
+  useEffect(() => {
+    if(selectedGame){
+    let difference = (5 - parseInt(selectedGame.rating))
 
-  //   let random  = '';
-  //   for(let i = 0; i< parseInt(selectedGame.rating); i++){
-  //     random += '★'
-  //   }
+    let random  = '';
+    for(let i = 0; i< parseInt(selectedGame.rating); i++){
+      random += '★'
+    }
   
-  //   for(let i = 0; i < difference; i++){
-  //     random += '☆'
-  //   }
+    for(let i = 0; i < difference; i++){
+      random += '☆'
+    }
 
-  //   setStarRating(random)
+    setStarRating(random)
 
-  //   return(setStarRating(''))
-  // }, [selectedGame])
+    return(setStarRating(''))
+  }
+
+  }, [selectedGame])
 
 
 
@@ -55,7 +58,7 @@ const GameDetails = (props) => {
             ))
           }</div>
           <div>Developers: {selectedGame.developers[0].name}</div>
-          {/* <div>{ratingStars}</div> */}
+          <div>{ratingStars}</div>
           <div>
             Publishers:{
             selectedGame.publishers.map((pub)=>(
